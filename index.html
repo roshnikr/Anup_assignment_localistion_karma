@@ -1,0 +1,85 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+	<title>My Todo Application</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="node_modules\angular/angular.min.js"></script>
+	<!-- <script src="node_modules\angular-ui-bootstrap\dist/ui-bootstrap.js"></script> -->
+	<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.4.js"></script>
+	<script src="node_modules\angular-translate\dist/angular-translate.min.js"></script>
+	<script src="node_modules\angular-translate-loader-partial/angular-translate-loader-partial.min.js"></script>
+	<link rel="stylesheet" href="node_modules\bootstrap\dist\css/bootstrap.min.css">
+	<script src="js/script.js"></script>
+	<style type="text/css"> 
+		header{
+			margin-bottom: 1px solid black;
+		}
+		.margintop{
+			margin-top: 10px;
+		}
+		.bluebtn{
+			color:#fff;
+			background-color: #4281c3;
+		}
+		.lightbluebtn{
+			color:#fff;
+			background-color: #57cbde;
+		}
+		.graycolor{
+			background-color: gray;
+		}
+		table{
+			margin-top:20px;
+		}
+		.addform{
+			background-color: #000;
+			color: #fff;
+		}
+	</style>
+</head>
+<body >
+	<div class="container-fluid" ng-controller="myController"> <!-- container begins here -->
+	 <div class="row">
+	 	<div class="col-xs-1"></div>
+	 	<div class="col-xs-10"> 
+	 		<header> <!-- header begins here -->
+	 		<div class=" text-right">
+	 			<label translate="change"></label>
+	 			<select ng-model="changed_langg" ng-init="changed_langg='en'"  ng-change="update_langg()">
+  					<option value="en" selected translate="english"></option>
+  					<option value="es" translate="spanish"></option>
+				</select>
+	 		</div>
+	 			
+				<h1 class="text-center col-xs-12" translate="title"></h1>
+				<p class="text-right"><a href="#" ng-click="open_popup()" translate="add" ></a></p>
+			</header> <!-- header ends here -->
+
+			<div class="col-xs-12"> <!-- table begins here -->
+				<table  class="table table-hover col-xs-12">
+					<tr>
+						<th>#</th>
+						<th translate="taskid"></th>
+						<th translate="taskname"></th>
+						<th translate="completed"></th>
+						<th translate="removetask"></th>
+						
+					</tr>
+					<tr ng-repeat="i in datas" ng-class="{'graycolor ':selects}">
+						<td>{{$index+1}}</td>
+						<td>{{i.tid}}</td>
+						<td>{{i.tname}}</td>
+						<td>
+							<input type="checkbox" ng-model="selects" value="false"/>
+						</td>
+						<td><a href="#" ng-click="remove($index)" translate="remove"></a></td>
+					</tr>
+				</table>
+			</div> <!-- table ends here -->
+	 	</div>
+	 	<div class="col-xs-1 "></div>
+	</div>
+	</div> <!-- container ends here -->
+</body>
+</html>

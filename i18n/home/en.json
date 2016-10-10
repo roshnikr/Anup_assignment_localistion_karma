@@ -1,0 +1,12 @@
+{
+	"title": "My ToDo Application",
+	"change": "Change Language",
+	"english": "English",
+	"spanish": "Spanish",
+	"add": "Add",
+	"taskid": "Task Id",
+	"taskname": "Task Name",
+	"completed": "Mark Completed",
+	"removetask": "Remove Task",
+	"remove": "Remove"
+}

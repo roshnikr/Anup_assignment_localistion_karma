@@ -1,0 +1,15 @@
+<form  class="col-xs-12 addform" autocomplete="off" > <!-- form begins here -->
+	<div class="form-group">
+		<label class="col-xs-3 margintop" for="taskid" translate="task_id"></label>
+		<div class="col-xs-8 margintop">
+			<input class="form-control" type="text" ng-model="tid" id="taskid" required >
+		</div>
+		
+		<label class="col-xs-3  margintop" for="taskname" translate="task_name"></label>
+		<div class="col-xs-8 margintop">
+			<input class="form-control" type="text" ng-model="tname" id="taskname" required>
+		</div>
+		<button type="submit" class="btn bluebtn col-xs-offset-3 margintop" ng-click=addData() translate="add_content"></button>
+		<button type="reset" class="btn lightbluebtn col-xs-offset-1 margintop" ng-click="cancel()" translate="cancel"></button>
+	</div>
+</form> <!-- form ends here -->
