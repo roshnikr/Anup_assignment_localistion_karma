@@ -6,11 +6,26 @@ myApp.config(function ($translateProvider, $translatePartialLoaderProvider) {
   urlTemplate: '/i18n/{part}/{lang}.json'
 });
 });
+myApp.factory('myFactory',function(){
+	var obj={};
+	var data_list=[
+	{tid:"100",tname:"Task 1"},
+	{tid:"101",tname:"Task 2"}
+	];
+	obj.getData=function(){
+		return data_list;
+	}
+	obj.setData=function(t,n){
+		data_list.push({tid:t,tname:n});
+	}
+	return obj;
+});
 
 // functions of controller
-myApp.controller('myController',['$scope','$modal','$translatePartialLoader','$translate',function($scope,$modal,$translatePartialLoader,$translate){
+myApp.controller('myController',['$scope','myFactory','$uibModal','$translatePartialLoader','$translate',function($scope,myFactory,$uibModal,$translatePartialLoader,$translate){
 	$scope.changed_langg='en';
-	$scope.datas=[{tid:"100",tname:"Task 1"},{tid:"101",tname:"Task 2"}];
+	$scope.test1="hai";
+	$scope.datas=myFactory.getData();
 
 	$translatePartialLoader.addPart('home');
 	$translate.refresh();
@@ -27,14 +42,14 @@ myApp.controller('myController',['$scope','$modal','$translatePartialLoader','$t
 		$translatePartialLoader.addPart('popup');
 		$translate.refresh();
 		$translate.use($scope.changed_langg);
-		var modalInstance = $modal.open({
+		var modalInstance = $uibModal.open({
 			templateUrl: 'add.html',
 			controller:'popupController',
-			resolve: {
-				datas_array: function () {
-					return $scope.datas;
-				}
-			}
+			// resolve: {
+			// 	datas_array: function () {
+			// 		return $scope.datas;
+			// 	}
+			// }
 		});
 	}
 	// function to remove table data
@@ -43,10 +58,11 @@ myApp.controller('myController',['$scope','$modal','$translatePartialLoader','$t
 	}
 }]);
 // code inside popupController
-myApp.controller('popupController',['$scope','$modalInstance','datas_array',function($scope,$modalInstance,datas_array){
+myApp.controller('popupController',['$scope','myFactory','$uibModalInstance',function($scope,myFactory,$uibModalInstance){
 	// function to add data to table
-	$scope.datas=datas_array;
+	
 	$scope.addData=function(){
+		$scope.datas=myFactory.getData();
 		var flag=0;
 		if($scope.tid==""||$scope.tname==""||$scope.tid==undefined||$scope.tname==undefined){
 			alert("Fill all input fields");
@@ -63,8 +79,8 @@ myApp.controller('popupController',['$scope','$modalInstance','datas_array',func
 				$scope.tid="";
 				$scope.tname="";
 			}else{
-				$scope.datas.push({tid:$scope.tid,tname:$scope.tname});
-				$modalInstance.dismiss('cancel');
+				myFactory.setData($scope.tid,$scope.tname);
+				$uibModalInstance.dismiss('cancel');
 			}
 		}
 		$scope.tid="";
@@ -74,7 +90,7 @@ myApp.controller('popupController',['$scope','$modalInstance','datas_array',func
 	$scope.cancel=function(){
 		$scope.tid="";
 		$scope.tname="";
-		$modalInstance.dismiss('cancel');
+		$uibModalInstance.dismiss('cancel');
 		
 	}
 

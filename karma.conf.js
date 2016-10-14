@@ -14,10 +14,25 @@ module.exports = function(config) {
 
 
     // list of files / patterns to load in the browser
-    files: [
-    'js/*script.js',
-    'tests/*spec.js'
-    ],
+    // files: [
+    //     'node_modules/angular/angular.min.js',
+    //     'node_modules/angular-translate/dist/angular-translate.min.js',
+    //     'node_modules/angular-translate-loader-partial/angular-translate-loader-partial.min.js',
+    //     'node_modules/angular-mocks/angular-mocks.js',
+    //     'js/script.js',
+    //     'tests/spec.js'
+    // ],
+     files: [
+    "node_modules/angular/angular.min.js",
+    "node_modules/angular-translate/dist/angular-translate.min.js",
+    'node_modules/angular-translate-loader-partial/angular-translate-loader-partial.min.js',
+    "node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js",
+    // "node_modules/bootstrap/dist/css/bootstrap.min.css",
+    "node_modules/angular-mocks/angular-mocks.js",
+    "js/script.js",
+    "tests/spec.js"
+
+    ],  
 
 
     // list of files to exclude
